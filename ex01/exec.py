@@ -4,7 +4,7 @@ def convert(arg):
     return arg[::-1].swapcase()
 
 def main(args):
-    print(' '.join(map(convert, args)))
+    print(' '.join(map(convert, args[::-1])))
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -13,4 +13,4 @@ def get_args():
     return args
 
 if __name__ == "__main__":
-    main(get_args()[::-1])
+    main(get_args())
