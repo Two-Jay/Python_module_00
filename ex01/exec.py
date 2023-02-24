@@ -1,15 +1,7 @@
 import argparse
 
 def convert(arg):
-    ret = ''
-    for i in range(len(arg)):
-        if arg[i].islower():
-            ret += arg[i].upper()
-        elif arg[i].isupper():
-            ret += arg[i].lower()
-        else:
-            ret += arg[i]
-    return ret[::-1]
+    return arg[::-1].swapcase()
 
 def main(args):
     print(' '.join(map(convert, args)))
