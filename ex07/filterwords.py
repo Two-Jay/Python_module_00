@@ -13,24 +13,21 @@ def main(args : list) -> None:
     ret = [i for i in preprocess(args[0]).split() if len(i) > args[1]]    
     print(ret)
 
-def print_error(msg : str) -> None:
-    print(msg)
-    exit()
-
 def validate_args(args : list) -> None:
-    if len(args) != 2: print_error("ERROR")
     try:
+        if len(args) != 2: raise Exception
         args[0] = str(args[0])
         args[1] = int(args[1])
+        if args[1] < 0: raise Exception
     except:
-        print_error("ERROR")
+        print("ERROR")
+        exit()
 
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(nargs = '*', dest = 'arg')
     args = parser.parse_args().arg
     validate_args(args)
-    args[1] = int(args[1])
     return args
 
 if __name__ == "__main__":
