@@ -1,19 +1,5 @@
 import time
 
-# Simple progress bar
-# - spec
-# [ETA: 00.00s] [00%] [=====================>] [100%] | elapsed time: 00.00s
-
-# ETA and elapsed time
-# - ETA: estimated time of arrival
-# - elapsed time: time since the beginning of the process
-# max_ETA 999.99s
-# max_elapsed_time 999.99s
-# if ETA > 999.99s, ETA = 999.99s+@
-
-# 시작시간을 저장해두고 업데이트 될 때마다 현재시간 - 시작시간을 통해 경과시간을 구한다.
-# 경과시간을 통해 남은 시간을 계산한다.
-
 color_green = "\033[32m"
 color_reset = "\033[0m"
 

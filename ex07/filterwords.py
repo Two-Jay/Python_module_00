@@ -20,8 +20,7 @@ def validate_args(args : list) -> None:
         args[1] = int(args[1])
         if args[1] < 0: raise Exception
     except:
-        print("ERROR")
-        exit()
+        exit("ERROR")
 
 def get_args():
     parser = argparse.ArgumentParser()
