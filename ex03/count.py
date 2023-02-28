@@ -3,6 +3,11 @@
 # --------------------------------------------------------------------------
 from abc import *
 import argparse
+import sys
+
+# * import
+# --------------------------------------------------------------------------
+sys.tracebacklimit = 0
 
 # * message
 # --------------------------------------------------------------------------
@@ -19,9 +24,6 @@ msg = {
 # * Class : AnalyzerStrategy <- ABCMeta
 # --------------------------------------------------------------------------
 class AnalyzerStrategy(metaclass=ABCMeta):
-    __count = 0
-    __keyword = ""
-
     def analyze(self, char):
         if self.condition(char):
             self.count += 1
@@ -50,7 +52,7 @@ class CountAnalyzer(AnalyzerStrategy):
 # * Class : UpperAnalyzer <- AnalyzerStrategy
 # --------------------------------------------------------------------------
 class UpperAnalyzer(AnalyzerStrategy):
-    def __init__(self):
+    def __init__(self): 
         self.count = 0
         self.keyword = "upper letter(s)"
 
@@ -125,7 +127,7 @@ class TextAnalyzer():
 # * main
 # --------------------------------------------------------------------------
 def validate_arguments(args):
-    if len(args) != 0:
+    if len(args) == 0:
         args.append(input(msg['notice']['user_input']))
     assert len(args) == 1, msg['error']['parameter']
     assert type(args[0]) == str, msg['error']['type']
