@@ -1,4 +1,14 @@
 pip list
+pip3 list
+
 pip show numpy
+pip3 show numpy
+
 pip uninstall numpy
-pip install numpy
+pip3 uninstall numpy
+
+pip install --upgrade --force-reinstall numpy
+pip3 install --upgrade --force-reinstall numpy
+
+pip freeze > requirements.txt
+pip3 freeze > requirements.txt
