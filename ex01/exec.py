@@ -9,7 +9,7 @@ import argparse
 sys.tracebacklimit = 0
 
 
-# * error_massege
+# * message
 # --------------------------------------------------------------------------
 msg = {
     "usage" : "Usage : Python3 exec.py [string]" 
@@ -21,7 +21,7 @@ def convert_and_swap(arg):
     return arg[::-1].swapcase()
 
 def main(args):
-    print(' '.join(map(convert, args[::-1])))
+    print(' '.join(map(convert_and_swap, args[::-1])))
 
 def validate_arg(args : list) -> None:
     assert len(args) >= 1 and str(args[0]), msg["usage"]
