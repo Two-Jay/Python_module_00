@@ -1,15 +1,31 @@
+
+# * import
+# --------------------------------------------------------------------------
 import argparse
 import sys
 
+# * config
+# --------------------------------------------------------------------------
 sys.tracebacklimit = 0
 
-errmsg_argument_maximum = 'more than one argument are provided'
-errmsg_argument_type = 'argument is not an integer'
+# * error_massege
+# --------------------------------------------------------------------------
+msg = {
+    "argument" : {
+        "minimum" : 'Parameter must be at least one',
+        "maximum" : 'more than one argument are provided',
+        "type" : 'argument is not an integer'
+    }
+}
 
+# * global variables
+# --------------------------------------------------------------------------
 EVEN = 'Even'
 ODD = 'Odd'
 ZERO = 'Zero'
 
+# * main
+# --------------------------------------------------------------------------
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(nargs = '*', dest = 'arg')
@@ -17,8 +33,9 @@ def get_args():
     return args
 
 def validate_args(args):
-    assert len(args) <= 1, errmsg_argument_maximum
-    assert args[0].isdigit(), errmsg_argument_type if len(args) == 1 else None
+    assert len(args) != 0, msg['argument']['minimum']
+    assert len(args) == 1, msg['argument']['maximum']
+    assert args[0].isdigit(), msg['argument']['type']
 
 def check_answer(args):
     return ZERO if int(args[0]) == 0 else EVEN if int(args[0]) % 2 == 0 else ODD
