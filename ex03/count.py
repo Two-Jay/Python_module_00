@@ -1,9 +1,23 @@
+
+# * import
+# --------------------------------------------------------------------------
 from abc import *
 import argparse
 
-## class definition start here
-## AnalyzerStrategy -> ConcreteStrategy => TextAnalyzer
+# * message
+# --------------------------------------------------------------------------
+msg = {
+    "notice" : {
+        "user_input" : "What is the text to analyse?\n"
+    },
+    "error" : {
+        "parameter" : "You must provide a string as argument",
+        "type" : "argument is not a string"
+    }
+}
 
+# * Class : AnalyzerStrategy <- ABCMeta
+# --------------------------------------------------------------------------
 class AnalyzerStrategy(metaclass=ABCMeta):
     __count = 0
     __keyword = ""
@@ -20,6 +34,8 @@ class AnalyzerStrategy(metaclass=ABCMeta):
     def display(self):
         pass
 
+# * Class : CountAnalyzer <- AnalyzerStrategy
+# --------------------------------------------------------------------------
 class CountAnalyzer(AnalyzerStrategy):
     def __init__(self):
         self.count = 0
@@ -31,6 +47,8 @@ class CountAnalyzer(AnalyzerStrategy):
     def display(self):
         print(f"The text contains {self.count} {self.keyword}:")
 
+# * Class : UpperAnalyzer <- AnalyzerStrategy
+# --------------------------------------------------------------------------
 class UpperAnalyzer(AnalyzerStrategy):
     def __init__(self):
         self.count = 0
@@ -42,6 +60,8 @@ class UpperAnalyzer(AnalyzerStrategy):
     def display(self):
         print(f"- {self.count} {self.keyword}")
 
+# * Class : LowerAnalyzer <- AnalyzerStrategy
+# --------------------------------------------------------------------------
 class LowerAnalyzer(AnalyzerStrategy):
     def __init__(self):
         self.count = 0
@@ -53,6 +73,8 @@ class LowerAnalyzer(AnalyzerStrategy):
     def display(self):
         print(f"- {self.count} {self.keyword}")
 
+# * Class : PunctuationAnalyzer <- AnalyzerStrategy
+# --------------------------------------------------------------------------
 class PunctuationAnalyzer(AnalyzerStrategy):
     punctuation = ["!", "?", ".", ",", ";", ":", "-", "_", "'", '"']
 
@@ -66,6 +88,8 @@ class PunctuationAnalyzer(AnalyzerStrategy):
     def display(self):
         print(f"- {self.count} {self.keyword}")
 
+# * Class : SpaceAnalyzer <- AnalyzerStrategy
+# --------------------------------------------------------------------------
 class SpaceAnalyzer(AnalyzerStrategy):
     def __init__(self):
         self.count = 0
@@ -77,6 +101,8 @@ class SpaceAnalyzer(AnalyzerStrategy):
     def display(self):
         print(f"- {self.count} {self.keyword}")
 
+# * Class : TextAnalyzer
+# --------------------------------------------------------------------------
 class TextAnalyzer():
     def __init__(self):
         self.analyzers = [
@@ -96,11 +122,13 @@ class TextAnalyzer():
         for analyzer in self.analyzers:
             analyzer.display()
 
+# * main
+# --------------------------------------------------------------------------
 def validate_arguments(args):
-    if len(args) == 0:
-        args.append(input("What is the text to analyse?\n"))
-    assert len(args) == 1, "You must provide a string as argument"
-    assert type(args[0]) == str, "argument is not a string"
+    if len(args) != 0:
+        args.append(input(msg['notice']['user_input']))
+    assert len(args) == 1, msg['error']['parameter']
+    assert type(args[0]) == str, msg['error']['type']
 
 def text_analyzer(args):
     """
