@@ -30,9 +30,12 @@ def print_recipe_impl(recipe_name):
         print('This recipe does not exist')
 
 def print_cookbook():
-    print('Here is the list of recipes in Python Cookbook: ')
-    for key, value in cookbook.items():
-        print(f"  - {key}")
+    if len(cookbook) > 0:
+        print('Here is the list of recipes in Python Cookbook: ')
+        for key, value in cookbook.items():
+            print(f"  - {key}")
+    else:
+        print('this Cookbook is empty')
 
 def add_recipe_impl(recipe_name, ingredients, meal, prep_time):
     cookbook[recipe_name] = {
