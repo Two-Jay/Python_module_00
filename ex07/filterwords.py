@@ -1,16 +1,26 @@
+
+# * import
+# --------------------------------------------------------------------------
 import argparse
 import sys
 
+# * config
+# --------------------------------------------------------------------------
 sys.tracebacklimit = 0
+
+# * global_variables
+# --------------------------------------------------------------------------
 punctuation = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
 
+# * main
+# --------------------------------------------------------------------------
 def preprocess(str) -> str:
     for i in punctuation:
         str = str.replace(i, ' ')
     return str
 
 def main(args : list) -> None:
-    ret = [i for i in preprocess(args[0]).split() if len(i) > args[1]]    
+    ret = [i for i in preprocess(args[0]).split() if len(i) >= args[1]]    
     print(ret)
 
 def validate_args(args : list) -> None:
