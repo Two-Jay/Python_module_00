@@ -55,15 +55,21 @@ def ft_progress(list : list):
         print(pb, end="\r", flush=True)
     print()
 
-def main():
+def do_loading(listy : list) -> None:
     print("Loading...")
-    listy = range(1000)
     ret = 0
     for i in ft_progress(listy):
         ret += (i + 3) % 5
         time.sleep(0.01)
     print("...\nDone!")
     print(ret)
+
+def main():
+    do_loading(range(100))
+    do_loading(range(100, 200))
+    do_loading(range(1))
+    do_loading(range(4))
+    do_loading(range(0,-100,-1))
 
 if __name__ == "__main__":
     main()
