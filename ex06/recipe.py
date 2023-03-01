@@ -1,3 +1,6 @@
+
+# * cookbook_dictionary
+# --------------------------------------------------------------------------
 cookbook = {
     "sandwich": {
         'ingredients' : ['ham', 'bread', 'cheese', 'tomatoes'],
@@ -15,6 +18,21 @@ cookbook = {
         'prep_time' : 15
     }
 }
+
+cookBook_prompt_options = {
+    '1': ['Add a recipe', add_recipe],
+    '2': ['Delete a recipe', delete_recipe],
+    '3': ['Print a recipe', print_recipe],
+    '4': ['Print the cookbook', print_cookbook],
+    '5': ['Quit', quit]
+}
+
+# * print helper
+# --------------------------------------------------------------------------
+def print_header():
+    print("Welcome to the Python Cookbook !\nList available options:")
+    for key, value in cookBook_prompt_options.items():
+        print(f"  {key}: {value[0]}")
 
 def print_recipe():
     recipe_name = input('Enter a recipe name: ')
@@ -37,6 +55,8 @@ def print_cookbook():
     else:
         print('this Cookbook is empty')
 
+# * feature helper
+# --------------------------------------------------------------------------
 def add_recipe_impl(recipe_name, ingredients, meal, prep_time):
     cookbook[recipe_name] = {
         'ingredients': ingredients,
@@ -71,22 +91,11 @@ def delete_recipe_impl(recipe_name):
     else:
         print('This recipe does not exist')
 
-def print_header():
-    print("Welcome to the Python Cookbook !\nList available options:")
-    for key, value in cookBook_prompt_options.items():
-        print(f"  {key}: {value[0]}")
-
 def quit():
-    print('Cookbook closed. Goodbye!')
-    exit()
+    exit('Cookbook closed. Goodbye!')
+# * main
+# --------------------------------------------------------------------------
 
-cookBook_prompt_options = {
-    '1': ['Add a recipe', add_recipe],
-    '2': ['Delete a recipe', delete_recipe],
-    '3': ['Print a recipe', print_recipe],
-    '4': ['Print the cookbook', print_cookbook],
-    '5': ['Quit', quit]
-}
 
 def main():
     print_header()
@@ -100,4 +109,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
