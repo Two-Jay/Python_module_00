@@ -93,10 +93,9 @@ def delete_recipe_impl(recipe_name):
 
 def quit():
     exit('Cookbook closed. Goodbye!')
+    
 # * main
 # --------------------------------------------------------------------------
-
-
 def main():
     print_header()
     while True:
