@@ -1,9 +1,16 @@
+
+# * import
+# --------------------------------------------------------------------------
 import time
 
+# * color variables
+# --------------------------------------------------------------------------
 color_green = "\033[32m"
 color_reset = "\033[0m"
 
-class ElapseManager:
+# * Class Elapse_manager
+# --------------------------------------------------------------------------
+class Elapse_manager:
     def __init__(self):
         self._start_time = time.time()
         self._elapsed_time = 0
@@ -24,7 +31,9 @@ class ElapseManager:
         if self._ETA > 999.99: self._ETA = "999.99 + @"
         return self._ETA
 
-class progress_bar:
+# * Class Progress_bar
+# --------------------------------------------------------------------------
+class Progress_bar:
     def __init__(self, list):
         self._list = list
         self._index = 0
@@ -32,7 +41,7 @@ class progress_bar:
         self._bar_length = 20
         self._bar_max = 100
         self._bar_term = self._bar_max / self._bar_length
-        self._elapse_manager = ElapseManager()
+        self._elapse_manager = Elapse_manager()
 
     def update(self):
         self._index += 1
@@ -49,7 +58,7 @@ class progress_bar:
         return f"ETA: {ETA:6.02f}s [{current_percent:6.02f}%] [{progress_bar_charged:20}] [{self._index}/{self._index_max}] | elapsed time: {elapsed_time:02.02f}s"
 
 def ft_progress(list : list):
-    pb = progress_bar(list)
+    pb = Progress_bar(list)
     for i in list:
         yield pb.update()
         print(pb, end="\r", flush=True)
