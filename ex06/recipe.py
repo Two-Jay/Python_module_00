@@ -1,3 +1,6 @@
+
+# * cookbook_dictionary
+# --------------------------------------------------------------------------
 cookbook = {
     "sandwich": {
         'ingredients' : ['ham', 'bread', 'cheese', 'tomatoes'],
@@ -16,6 +19,21 @@ cookbook = {
     }
 }
 
+cookBook_prompt_options = {
+    '1': ['Add a recipe', add_recipe],
+    '2': ['Delete a recipe', delete_recipe],
+    '3': ['Print a recipe', print_recipe],
+    '4': ['Print the cookbook', print_cookbook],
+    '5': ['Quit', quit]
+}
+
+# * print helper
+# --------------------------------------------------------------------------
+def print_header():
+    print("Welcome to the Python Cookbook !\nList available options:")
+    for key, value in cookBook_prompt_options.items():
+        print(f"  {key}: {value[0]}")
+
 def print_recipe():
     recipe_name = input('Enter a recipe name: ')
     print_recipe_impl(recipe_name)
@@ -30,10 +48,15 @@ def print_recipe_impl(recipe_name):
         print('This recipe does not exist')
 
 def print_cookbook():
-    print('Here is the list of recipes in Python Cookbook: ')
-    for key, value in cookbook.items():
-        print(f"  - {key}")
+    if len(cookbook) > 0:
+        print('Here is the list of recipes in Python Cookbook: ')
+        for key, value in cookbook.items():
+            print(f"  - {key}")
+    else:
+        print('this Cookbook is empty')
 
+# * feature helper
+# --------------------------------------------------------------------------
 def add_recipe_impl(recipe_name, ingredients, meal, prep_time):
     cookbook[recipe_name] = {
         'ingredients': ingredients,
@@ -68,23 +91,11 @@ def delete_recipe_impl(recipe_name):
     else:
         print('This recipe does not exist')
 
-def print_header():
-    print("Welcome to the Python Cookbook !\nList available options:")
-    for key, value in cookBook_prompt_options.items():
-        print(f"  {key}: {value[0]}")
-
 def quit():
-    print('Cookbook closed. Goodbye!')
-    exit()
-
-cookBook_prompt_options = {
-    '1': ['Add a recipe', add_recipe],
-    '2': ['Delete a recipe', delete_recipe],
-    '3': ['Print a recipe', print_recipe],
-    '4': ['Print the cookbook', print_cookbook],
-    '5': ['Quit', quit]
-}
-
+    exit('Cookbook closed. Goodbye!')
+    
+# * main
+# --------------------------------------------------------------------------
 def main():
     print_header()
     while True:

@@ -1,20 +1,36 @@
+
+# * import
+# --------------------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
 import argparse
 import sys
 import decimal
 
+
+# * config
+# --------------------------------------------------------------------------
 sys.tracebacklimit = 0
 
+
+# * global variables
+# --------------------------------------------------------------------------
 ljust_width = 15
 ljust_diverr_width = 6
-errmsg = {
+
+
+# * messege
+# --------------------------------------------------------------------------
+msg = {
     'argument_maximum' : 'too many arguments',
     'argument_type' : 'only integers',
-    'no_argument' : """Usage: python operations.py <number1> <number2>\nExample:\n    python operations.py 10 3""",
+    'usage' : """Usage: python operations.py <number1> <number2>\nExample:\n    python operations.py 10 3""",
     'module_by_zero' : "ERROR (modulo by zero)",
     'divide_by_zero' : "ERROR (division by zero)",
 }
 
+
+# * Class Value
+# --------------------------------------------------------------------------
 class Value():
     def __init__(self, value : int):
         self.value = decimal.Decimal(value)
@@ -22,6 +38,8 @@ class Value():
     def get(self):
         return self.value
 
+# * AbstractClass Operator
+# --------------------------------------------------------------------------
 class Operator(metaclass=ABCMeta):
     __keyword = ''
     __result = 0
@@ -34,6 +52,8 @@ class Operator(metaclass=ABCMeta):
     def __str__(self):
         pass
 
+# * Class AddOperator extends Operator
+# --------------------------------------------------------------------------
 class AddOperator(Operator):
     __keyword = "Sum"
     __result = 0
@@ -44,6 +64,8 @@ class AddOperator(Operator):
     def __str__(self):
         return f"{self.__keyword.ljust(ljust_width)}: {self.__result}"
 
+# * Class SubtractOperator extends Operator
+# --------------------------------------------------------------------------
 class SubtractOperator(Operator):
     __keyword = "Difference"
     __result = 0
@@ -54,6 +76,8 @@ class SubtractOperator(Operator):
     def __str__(self):
         return f"{self.__keyword.ljust(ljust_width)}: {self.__result}"
 
+# * Class MultiplyOperator extends Operator
+# --------------------------------------------------------------------------
 class MultiplyOperator(Operator):
     __keyword = "Product"
     __result = 0
@@ -64,6 +88,8 @@ class MultiplyOperator(Operator):
     def __str__(self):
         return f"{self.__keyword.ljust(ljust_width)}: {self.__result}"
 
+# * Class DivideOperator extends Operator
+# --------------------------------------------------------------------------
 class DivideOperator(Operator):
     __keyword = "Quotient"
     __result = 0
@@ -73,7 +99,9 @@ class DivideOperator(Operator):
 
     def __str__(self):
         return f"{self.__keyword.ljust(ljust_width)}: {self.__result}"
-    
+
+# * Class RemainderOperator extends Operator
+# --------------------------------------------------------------------------
 class RemainderOperator(Operator):
     __keyword = "Remainder"
     __result = 0
@@ -84,6 +112,8 @@ class RemainderOperator(Operator):
     def __str__(self):
         return f"{self.__keyword.ljust(ljust_width)}: {self.__result}"
 
+# * Class Calculator
+# --------------------------------------------------------------------------
 class Calculator():
     OperatorList = [AddOperator(), SubtractOperator(), MultiplyOperator(), DivideOperator(), RemainderOperator()]
 
@@ -96,17 +126,17 @@ class Calculator():
             operator.operate(self.value1, self.value2)
             print(operator)
 
-
+# * main
+# --------------------------------------------------------------------------
 def main(args):
     Calculator(Value(int(args[0])), Value(int(args[1]))).operate()
 
 def validate_args(args):
     if len(args) <= 1:
-        print(errmsg['no_argument'])
-        exit()
-    assert len(args) == 2, errmsg['argument_maximum']
-    assert args[0].isdigit(), errmsg['argument_type']
-    assert args[1].isdigit(), errmsg['argument_type']
+        exit(msg['usage'])
+    assert len(args) == 2, msg['argument_maximum']
+    assert args[0].isdigit(), msg['argument_type']
+    assert args[1].isdigit(), msg['argument_type']
 
 def get_args():
     parser = argparse.ArgumentParser()

@@ -1,14 +1,22 @@
+# * import
+# --------------------------------------------------------------------------
 import sys
 import random
 
+# * config
+# --------------------------------------------------------------------------
 sys.tracebacklimit = 0
 
+# * global variable
+# --------------------------------------------------------------------------
 msg_hello = """This is an interactive guessing game!
 You have to enter a number between 1 and 99 to find out the secret number.
 Type 'exit' to end the game.
 Good luck!
 """
 
+# * Class UserInputManager
+# --------------------------------------------------------------------------
 class UserInputManager:
     def __init__(self, min, max):
         self._min = min
@@ -28,6 +36,8 @@ class UserInputManager:
             print("That's not a number.")
             return False
         
+# * Class AnswerJudge
+# --------------------------------------------------------------------------
 class AnswerJudge:
     def __init__(self, answer):
         self._answer = answer
@@ -57,6 +67,8 @@ class AnswerJudge:
             print("Too low!")
         return False
 
+# * GuessGame
+# --------------------------------------------------------------------------
 class GuessGame:
     def __init__(self, answer_min, answer_max):
         self._answer_min = answer_min
@@ -78,6 +90,8 @@ class GuessGame:
         print("Goodbye!")
         exit()
 
+# * main
+# --------------------------------------------------------------------------
 def print_Hello():
     print(msg_hello)
     game = GuessGame(1, 99)
