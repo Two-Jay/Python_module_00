@@ -126,30 +126,36 @@ class TextAnalyzer():
 
 # * main
 # --------------------------------------------------------------------------
-def validate_arguments(args):
-    if len(args) == 0:
-        args.append(input(msg['notice']['user_input']))
-    assert len(args) == 1, msg['error']['parameter']
-    assert type(args[0]) == str, msg['error']['type']
+def validate_arg(arg : not list):
+    if arg == None:
+        arg = input(msg['notice']['user_input'])
+    assert type(arg) == str, msg['error']['type']
+    return arg
 
-def text_analyzer(args):
+def validate_args(args):
+    if len(args) == 0:
+        args[0] = input(msg['notice']['user_input'])
+    assert len(args) == 1, msg['error']['parameter']
+
+def text_analyzer(argument):
     """
     This function counts the number of upper characters, lower characters,
     punctuation and spaces in a given text.
     """
-    validate_arguments(args)
+    argument = validate_arg(argument)
     analyzer = TextAnalyzer()
-    analyzer.analyze(args[0])
+    analyzer.analyze(argument)
     analyzer.display()
 
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(nargs = '*', dest = 'arg')
     args = parser.parse_args().arg
+    validate_args(args)
     return args
 
 def main(args):
     text_analyzer(args)
 
 if __name__ == "__main__":
-    main(get_args())
+    main(get_args()[0])
