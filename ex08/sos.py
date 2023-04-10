@@ -61,9 +61,7 @@ def convert_str_to_morse(str:str) -> str:
             ret += morse_dict[str[i].lower()]
     return ret
 
-def main(args : list) -> None:
-    if len(args) == 0:
-        exit()
+def print_args_by_morse(args : list) -> None:
     ret = ""
     for i in args:
         ret += convert_str_to_morse(i)
@@ -71,9 +69,10 @@ def main(args : list) -> None:
             ret += " / "
     print(ret)
 
-def print_error(msg : str) -> None:
-    print(msg)
-    exit()
+def main(args : list) -> None:
+    if len(args) == 0:
+        exit()
+    print_args_by_morse(args)
 
 def validate_args(args : list) -> None:
     try:
@@ -81,7 +80,8 @@ def validate_args(args : list) -> None:
             for j in args:
                 if i in j: raise Exception
     except:
-        print_error("ERROR")
+        print("ERROR")
+        exit()
 
 def get_args():
     parser = argparse.ArgumentParser()

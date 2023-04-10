@@ -19,20 +19,16 @@ cookbook = {
     }
 }
 
-cookBook_prompt_options = {
-    '1': ['Add a recipe', add_recipe],
-    '2': ['Delete a recipe', delete_recipe],
-    '3': ['Print a recipe', print_recipe],
-    '4': ['Print the cookbook', print_cookbook],
-    '5': ['Quit', quit]
-}
-
 # * print helper
 # --------------------------------------------------------------------------
-def print_header():
-    print("Welcome to the Python Cookbook !\nList available options:")
+def print_header_options():
     for key, value in cookBook_prompt_options.items():
         print(f"  {key}: {value[0]}")
+
+def print_header():
+    print("Welcome to the Python Cookbook !\nList available options:")
+    print_header_options()
+
 
 def print_recipe():
     recipe_name = input('Enter a recipe name: ')
@@ -76,6 +72,9 @@ def get_input_ingrediants():
 
 def add_recipe():
     recipe_name = input('Enter a name: ')
+    if recipe_name in cookbook:
+        print('The recipe you entered already exists.')
+        return 
     ingredients = get_input_ingrediants()
     meal = input('Enter a meal type: ')
     prep_time = input('Enter a preparation time in minutes: ')
@@ -86,20 +85,29 @@ def delete_recipe():
     delete_recipe_impl(recipe_name)
 
 def delete_recipe_impl(recipe_name):
-    if recipe_name in cookbook:
-        del cookbook[recipe_name]
-    else:
-        print('This recipe does not exist')
+    if recipe_name not in cookbook:
+        print('The recipe you entered does not exist.')
+        return
+    del cookbook[recipe_name]
 
 def quit():
     exit('Cookbook closed. Goodbye!')
-    
+
 # * main
 # --------------------------------------------------------------------------
+cookBook_prompt_options = {
+    '1': ['Add a recipe', add_recipe],
+    '2': ['Delete a recipe', delete_recipe],
+    '3': ['Print a recipe', print_recipe],
+    '4': ['Print the cookbook', print_cookbook],
+    '5': ['Quit', quit],
+    '-help': ['print options again', print_header_options]
+}
+
 def main():
     print_header()
     while True:
-        choice = input('Please select an option: ')
+        choice = input("Please select an option (to print options : '-help'): ")
         if choice in cookBook_prompt_options:
             function = cookBook_prompt_options[choice][1]
             function()

@@ -9,7 +9,7 @@ kata = {
 # * main
 # --------------------------------------------------------------------------
 def validate(kata : dict) -> bool:
-    return isinstance(kata, dict) and all(type(x) == str for x in kata.values()) and all(type(x) == str for x in kata.keys())
+    return type(kata) == dict and all(type(x) == str for x in kata.values()) and all(type(x) == str for x in kata.keys())
 
 def do_kata(kata : dict):
     if validate(kata) == True:

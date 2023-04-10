@@ -2,12 +2,10 @@
 # --------------------------------------------------------------------------
 kata = (2019, 9, 25, 3, 30)
 
-kata1 = (302, 9, 25, 3, 30)
-
 # * main
 # --------------------------------------------------------------------------
 def validate(kata : tuple) -> bool:
-    return isinstance(kata, tuple) and len(kata) == 5 and all(type(x) == int for x in kata)
+    return type(kata) == tuple and len(kata) == 5 and all(type(x) == int for x in kata)
 
 def do_kata(kata : tuple) -> None:
     if validate(kata) == True:

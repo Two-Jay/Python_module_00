@@ -5,8 +5,8 @@ kata = (0, 4, 132.42222, 10000, 12345.67)
 # * main
 # --------------------------------------------------------------------------
 def validate(kata : tuple) -> bool:
-    return isinstance(kata, tuple) and len(kata) == 5 and \
-        all(isinstance(i , int) for i in [kata[0], kata[1], kata[3]]) and all(isinstance(i , float) for i in [kata[2], kata[4]])
+    return type(kata) == tuple and len(kata) == 5 and \
+        all(type(i) == int for i in [kata[0], kata[1], kata[3]]) and all(type(i) == float for i in [kata[2], kata[4]])
 
 def do_kata(kata : tuple) -> None:
     if validate(kata) == True:
