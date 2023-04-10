@@ -1,11 +1,16 @@
 # * kata value
 # --------------------------------------------------------------------------
 kata = "The right format"
+kata1 = "123456789a123456789b123456789c123456789d123456789"
 
 # * main
 # --------------------------------------------------------------------------
+def validate(kata : str) -> bool:
+    return isinstance(kata, str)
+
 def do_kata(kata : str) -> None:
-    print(f"{kata:->42}", end='')
+    if validate(kata) == True:
+        print(f"{kata[0:42]:->42}", end='')
 
 def main():
     do_kata(kata)
