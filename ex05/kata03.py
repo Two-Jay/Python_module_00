@@ -11,7 +11,6 @@ def do_kata(kata : str) -> None:
 
 def main():
     do_kata(kata)
-    do_kata(kata_long)
 
 if __name__ == "__main__":
     main()
