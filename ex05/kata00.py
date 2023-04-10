@@ -9,7 +9,6 @@ def do_kata(kata : tuple) -> None:
 
 def main():
     do_kata(kata)
-    do_kata(kata2)
 
 if __name__ == "__main__":
     main()
